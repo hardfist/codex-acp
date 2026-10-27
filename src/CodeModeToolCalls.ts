@@ -37,7 +37,6 @@ export class CodeModeToolCalls {
             toolCallId: item.call_id,
             status: /^Script (failed\b|error:)/.test(text) ? "failed" : "completed",
             rawOutput: {output: item.output},
-            content: [{type: "content", content: {type: "text", text}}],
         };
     }
 

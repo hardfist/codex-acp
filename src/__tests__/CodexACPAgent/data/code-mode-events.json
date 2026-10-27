@@ -37,16 +37,7 @@
               "text": "/test/cwd"
             }
           ]
-        },
-        "content": [
-          {
-            "type": "content",
-            "content": {
-              "type": "text",
-              "text": "Script completed\nOutput:\n\n/test/cwd"
-            }
-          }
-        ]
+        }
       }
     }
   ]

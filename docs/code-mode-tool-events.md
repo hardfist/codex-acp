@@ -4,7 +4,7 @@ This fork adds live Code Mode tool events to `codex-acp` v1.13.1.
 New threads subscribe to the Codex app-server's experimental raw response items.
 An outer `custom_tool_call` named `exec` becomes an ACP `tool_call` containing
 the JavaScript source. Its matching `custom_tool_call_output` becomes a
-`tool_call_update` containing the original output and a text preview.
+`tool_call_update` containing the original output in `rawOutput`.
 The adapter pairs these events by `call_id` and ignores duplicate notifications.
 Nested command and MCP events keep their existing mappings.
 
