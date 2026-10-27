@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.4.0](https://github.com/agentclientprotocol/codex-acp/compare/v2.3.0...v2.4.0) (2026-10-27)
+
+
+### Features
+
+* add batch session metadata lookup ([#669](https://github.com/agentclientprotocol/codex-acp/issues/669)) ([0539d3d](https://github.com/agentclientprotocol/codex-acp/commit/0539d3da63948f55be3a90727fc550db40c5e8bb))
+* add live standard ACP subagent sessions ([#682](https://github.com/agentclientprotocol/codex-acp/issues/682)) ([fe3ae92](https://github.com/agentclientprotocol/codex-acp/commit/fe3ae92487f991fe456541f3e9344732faeadac7))
+* replay recorded subagent conversations ([#684](https://github.com/agentclientprotocol/codex-acp/issues/684)) ([bbe14f6](https://github.com/agentclientprotocol/codex-acp/commit/bbe14f6661bb90027938374346f15cc7254708a6))
+
+
+### Bug Fixes
+
+* recover recorded paths for known subagents ([#687](https://github.com/agentclientprotocol/codex-acp/issues/687)) ([6cce035](https://github.com/agentclientprotocol/codex-acp/commit/6cce03545eaaf5daef849aa9647d4ccfdc22eb41))
+
+
+### Performance Improvements
+
+* no rollout reads and no archived listing for the session list ([#689](https://github.com/agentclientprotocol/codex-acp/issues/689)) ([582e545](https://github.com/agentclientprotocol/codex-acp/commit/582e545eb1868763645ea59b1a2c106e50d5d471))
+
 ## [2.3.0](https://github.com/agentclientprotocol/codex-acp/compare/v2.2.2...v2.3.0) (2026-10-26)
 
 
