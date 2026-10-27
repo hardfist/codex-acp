@@ -1,0 +1,53 @@
+{
+  "method": "sessionUpdate",
+  "args": [
+    {
+      "sessionId": "code-mode-session",
+      "update": {
+        "sessionUpdate": "tool_call",
+        "toolCallId": "outer-exec",
+        "name": "exec",
+        "title": "Code Mode exec",
+        "kind": "execute",
+        "status": "in_progress",
+        "rawInput": {
+          "code": "const r = await tools.exec_command({cmd: \"pwd\"});\ntext(r.output);"
+        }
+      }
+    }
+  ]
+}
+{
+  "method": "sessionUpdate",
+  "args": [
+    {
+      "sessionId": "code-mode-session",
+      "update": {
+        "sessionUpdate": "tool_call_update",
+        "toolCallId": "outer-exec",
+        "status": "completed",
+        "rawOutput": {
+          "output": [
+            {
+              "type": "input_text",
+              "text": "Script completed\nOutput:\n"
+            },
+            {
+              "type": "input_text",
+              "text": "/test/cwd"
+            }
+          ]
+        },
+        "content": [
+          {
+            "type": "content",
+            "content": {
+              "type": "text",
+              "text": "Script completed\nOutput:\n\n/test/cwd"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

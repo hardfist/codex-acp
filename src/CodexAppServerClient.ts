@@ -581,7 +581,9 @@ export class CodexAppServerClient {
     }
 
     async threadStart(params: ThreadStartParams): Promise<ThreadStartResponse> {
-        return await this.sendRequest({ method: "thread/start", params: params });
+        // The stable generated types omit this experimental event subscription.
+        const rawEventParams = {...params, experimentalRawEvents: true};
+        return await this.sendRequest({ method: "thread/start", params: rawEventParams });
     }
 
     async threadSetName(params: ThreadSetNameParams): Promise<ThreadSetNameResponse> {

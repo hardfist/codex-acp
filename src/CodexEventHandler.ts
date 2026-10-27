@@ -85,6 +85,7 @@ import type {SubagentState} from "./subagents/AcpSubagents";
 import {mergeRateLimitSnapshot} from "./RateLimitsMap";
 import {AGENT_FILE_CHANGE_REPORT_MAX_DIFF_BYTES} from "./AgentFileChangeReport";
 import {createSessionNotice} from "./SessionNotice";
+import {CodeModeToolCalls} from "./CodeModeToolCalls";
 
 export { stripShellPrefix };
 
@@ -226,6 +227,7 @@ export class CodexEventHandler {
     private planUpdateChain: Promise<void> = Promise.resolve();
     private disposed = false;
     private readonly seenReasoningDeltaItemIds = new Set<string>();
+    private readonly codeModeToolCalls = new CodeModeToolCalls();
     private readonly terminalCommandIds = new Set<string>();
     private readonly commandOutputIds = new Set<string>();
     private readonly agentMessagePhases = new Map<string, string | null>();
@@ -533,6 +535,8 @@ export class CodexEventHandler {
             case "item/completed":
                 this.completeRetryIncidentOnTurnProgress();
                 return await this.completeItemEvent(notification.params);
+            case "rawResponseItem/completed":
+                return this.codeModeToolCalls.handle(notification.params);
             case "turn/plan/updated":
                 this.completeRetryIncidentOnTurnProgress();
                 return await this.updatePlan(notification.params);
@@ -559,6 +563,9 @@ export class CodexEventHandler {
                 await this.flushPendingErrors();
                 return null;
             case "turn/completed":
+                for (const update of this.codeModeToolCalls.finishTurn(notification.params.threadId, notification.params.turn.id)) {
+                    await this.session.update(update, this.subagents.notificationSessionId(notification));
+                }
                 await this.flushPendingPlanUpdates();
                 this.clearPlanTurnState();
                 this.sessionState.currentTurnId = null;
@@ -683,7 +690,6 @@ export class CodexEventHandler {
             case "skills/changed":
             case "mcpServer/oauthLogin/completed":
             case "externalAgentConfig/import/completed":
-            case "rawResponseItem/completed":
             case "rawResponse/completed":
             case "thread/started":
             case "remoteControl/status/changed":
